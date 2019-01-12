@@ -1,0 +1,19 @@
+22:22 2560-มิ.ย.-24
+ชุดคำสั่งอ่านไฟล์
+
+[filename, pathname] = uigetfile( ...
+    {'*.mat', 'All MAT-Files (*.mat)'; ...
+        '*.*','All Files (*.*)'}, ...
+    'Select Address Book');
+% If "Cancel" is selected then return
+if isequal([filename,pathname],[0,0])
+    return
+    % Otherwise construct the full file name and _and load the file.
+else
+    File = fullfile(pathname,filename);
+    % if the MAT-file is not valid, do not save the name
+    if Check_And_Load(File,handles)
+        handles.LastFIle = File;
+        guidata(hObject,handles)
+    end
+end
